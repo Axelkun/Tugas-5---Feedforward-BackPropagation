@@ -90,12 +90,12 @@ def NewBias(delta,b):
 def FF(i,dataset,wh,bh,wo,bo):
     Hh = fH(dataset[i],wh,bh)
     sigh = sigmoid(Hh)
-    Ho = fH(sigh,wo, bo)
+    Ho = fH(sigh,wo,bo)
     sigo = sigmoid(Ho)
     deltao = deltaO(dataset[i], sigo);
     deltah = deltaH(dataset[i], sigh);
-    pre = predic(sigh)
-    err = error(dataset[i], sigh)
+    pre = predic(sigo)
+    err = error(dataset[i], sigo)
     newWO = NewWeight(deltao, sigh, wo)
     newWH = NewWeight(deltah, dataset[i],wh)
     newBO = NewBias(deltao,bo)
@@ -106,14 +106,14 @@ def FF(i,dataset,wh,bh,wo,bo):
 
 def FFSoftmax(i,dataset,wh,bh,wo,bo):
     Hh = fH(dataset[i],wh,bh)
-    sigh = softmax(Hh)
-    Ho = fH(sigh,wo, bo)
-    sigo = softmax(Ho)
-    deltao = deltaO(dataset[i], sigo);
-    deltah = deltaH(dataset[i], sigh);
-    pre = predic(sigh)
-    err = error(dataset[i], sigh)
-    newWO = NewWeight(deltao, sigh, wo)
+    softh = softmax(Hh)
+    Ho = fH(sigh,wo,bo)
+    softo = softmax(Ho)
+    deltao = deltaO(dataset[i], softo);
+    deltah = deltaH(dataset[i], softh);
+    pre = predic(softo)
+    err = error(dataset[i], softo)
+    newWO = NewWeight(deltao, softh, wo)
     newWH = NewWeight(deltah, dataset[i],wh)
     newBO = NewBias(deltao,bo)
     newBH = NewBias(deltah,bh)

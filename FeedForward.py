@@ -85,8 +85,6 @@ def NewBias(delta,b):
         ans.append(b[i]-(a*delta[i]))
     return ans
 
-# defining Feedforward===============================================
-
 def FF(i,dataset,wh,bh,wo,bo):
     Hh = fH(dataset[i],wh,bh)
     sigh = sigmoid(Hh)

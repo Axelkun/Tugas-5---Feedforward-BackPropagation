@@ -101,12 +101,12 @@ def NewBias(delta,b):
 def BP(i,dataset,wh,bh,wo,bo):
     Hh = fH(dataset[i],wh,bh)
     sigh = sigmoid(Hh)
-    Ho = fH(sigh,wo, bo)
+    Ho = fH(sigh,wo,bo)
     sigo = sigmoid(Ho)
     deltao = deltaO(dataset[i], sigo);
     deltah = deltaH(wo, deltao, sigh);
-    pre = predic(sigh)
-    err = error(dataset[i], sigh)
+    pre = predic(sigo)
+    err = error(dataset[i], sigo)
     newWO = NewWeight(deltao, sigh, wo)
     newWH = NewWeight(deltah, dataset[i],wh)
     newBO = NewBias(deltao,bo)
@@ -117,14 +117,14 @@ def BP(i,dataset,wh,bh,wo,bo):
 
 def BPSoftmax(i,dataset,wh,bh,wo,bo):
     Hh = fH(dataset[i],wh,bh)
-    sigh = softmax(Hh)
-    Ho = fH(sigh,wo, bo)
-    sigo = softmax(Ho)
-    deltao = deltaO(dataset[i], sigo);
-    deltah = deltaH(wo, deltao, sigh);
-    pre = predic(sigh)
-    err = error(dataset[i], sigh)
-    newWO = NewWeight(deltao, sigh, wo)
+    softh = softmax(Hh)
+    Ho = fH(softh,wo,bo)
+    softo = softmax(Ho)
+    deltao = deltaO(dataset[i], softo);
+    deltah = deltaH(wo, deltao, softh);
+    pre = predic(softo)
+    err = error(dataset[i], softh)
+    newWO = NewWeight(deltao, softh, wo)
     newWH = NewWeight(deltah, dataset[i],wh)
     newBO = NewBias(deltao,bo)
     newBH = NewBias(deltah,bh)
@@ -319,14 +319,14 @@ def MLBPSoftmax(dataset, wh, bh, wo, bo):
 #=============================================================================
 a=0.1
 wh =[[0.21,0.32,0.23,0.21],
-     [0.32,0.13,0.23,0.11],
+     [0.12,0.13,0.23,0.11],
      [0.14,0.31,0.33,0.42],
      ]
-bh = [0.12,0.33,0.21]
+bh = [0.12,0.33,0.11]
 
 wo =[[0.32,0.12,0.13],
      [0.31,0.11,0.23],
-     [0.42,0.33,0.31],
+     [0.42,0.13,0.31],
      ]
 bo = [0.12,0.23,0.12]
 MLBP(dataset,wh,bh,wo,bo)
